@@ -454,6 +454,8 @@
 ;; Undo/redo
 (global-set-key (kbd "s-z") 'undo)
 (global-set-key (kbd "s-Z") 'redo)
+;; Selection
+(global-set-key (kbd "s-a") 'mark-whole-buffer)
 ;; Framewindow, buffer
 (global-set-key (kbd "s-{") 'previous-buffer) ;; this should be different
 (global-set-key (kbd "s-}") 'next-buffer)
