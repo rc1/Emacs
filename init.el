@@ -339,7 +339,7 @@
  '(diredp-compressed-file-suffix ((t (:foreground "#7b68ee"))))
  '(diredp-ignored-file-name ((t (:foreground "#aaaaaa"))))
 
-'(rainbow-delimiters-depth-1-face ((t (:foreground "#00ff00"))))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "#00ff00"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "#00fff6"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "#aaff00"))))
  '(rainbow-delimiters-depth-4-face ((t (:foreground "#f600ff"))))
