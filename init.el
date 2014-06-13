@@ -107,6 +107,11 @@
 ;; If don't want to use the flx's highlights
 ;; (setq flx-ido-use-faces nil)
 (setq ido-ubiquitous-mode t)
+(require 'ido-vertical-mode)
+(ido-vertical-mode 1)
+;; Use up down keys to move through options
+;; and left right to move through directories, yay!
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
 ;; # Recent files
 ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
@@ -128,22 +133,23 @@
 ;; # Auto Complete
 (require 'auto-complete-config)
 (setq
- ac-fuzzy-complete t
+ ac-fuzzy-complete t 
  ac-auto-start 2
  ac-auto-show-menu 0.0
  ac-delay 0.1
- ac-delay 0.2) 
+ ac-delay 0.2)
+
+;; # Better Buffer
+(defalias 'list-buffers 'ibuffer)
+
+;; # The Bell
+;; (setq ring-bell-function #'ignore)
+(setq ring-bell-function (lambda () (message "*beep*")))
  
 ;; # Multiple Cursors
 (require 'multiple-cursors)
 (global-unset-key (kbd "M-<down-mouse-1>"))
 (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
-
-;; # SrSpeedvar   
-;; Allows speedbar to open up in the current window instead of a new frame
-;; (require 'sr-speedbar)
-;; Add a key binding for speedbar
-;; (global-set-key (kbd "C-c s") 'sr-speedbar-select-window)
 
 ;; # Sessions
 ;; Save the state of emacs on exit
@@ -165,13 +171,6 @@
 
 ;; # C++
 (setq-default c-basic-offset 4)
-
-;; # Ido Setup
-;; (require 'ido)
-;; (ido-mode t)
-
-;; (setq ido-enable-flex-matching t)
-;; (setq id-everywhere t)
 
 ;; # Recent files
 ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
@@ -524,4 +523,6 @@
 (global-set-key (kbd "s-e") 'expand-region-to-whole-line)
 ;; Deleteing
 (global-set-key "\M-\d" 'rc1-stepped-delete-back)
+;; Better ido file
+(global-set-key (kbd "M-SPC") 'ido-recentf-open)
 
