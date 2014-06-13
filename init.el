@@ -1,31 +1,20 @@
 ;; # Packages
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;; ## Auto Install Packages
-;; (defun ensure-package-installed (&rest packages)
-;;   "Assure every package is installed, ask for installation if it’s not. Return a list of installed packages or nil for every skipped package."
-;;   (mapcar
-;;    (lambda (package)
-;;      ;; (package-installed-p 'evil)
-;;      (if (package-installed-p package)
-;;          nil
-;;        (if (y-or-n-p (format "Package %s is missing. Install it? " package))
-;;            (package-install package)
-;;          package)))
-;;    packages))
-
-;; ;; make sure to have downloaded archive description.
-;; ;; Or use package-archive-contents as suggested by Nicolas Dudebout
-;; (or (file-exists-p package-user-dir)
-;;     (package-refresh-contents))
-
-;; (ensure-package-installed 'redo+ 'ido 'flx-ido 'auto-complete-config 'multiple-cursors 'flycheck 'js-mode-hook 'auto-complete-config 'ace-jump-mode 'rainbow-delimiters 'auto-complete 'linum 'highline) ;  --> (nil nil) if iedit and magit are already installed
-
 ;; Initialise the package system.
 (package-initialize)
+;; ## Auto Install Packages
+; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
+;; nstall the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 
 ;; # Mac like keyboard shortcuts
 
@@ -136,15 +125,6 @@
     (if (find-file (ido-completing-read "Find recent file: " recentf-list))
 	(message "Opening file...")
       (message "Aborting")))
-
-;; # Auto Complete
-(require 'auto-complete-config)
-(setq
- ac-fuzzy-complete t 
- ac-auto-start 2
- ac-auto-show-menu 0.0
- ac-delay 0.1
- ac-delay 0.2)
 
 ;; # Better Buffer
 (defalias 'list-buffers 'ibuffer)
