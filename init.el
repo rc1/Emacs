@@ -1,24 +1,31 @@
-;; # Requires Emacs' Package functionality
+;; # Packages
+;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; ## Auto Install Packages
+;; (defun ensure-package-installed (&rest packages)
+;;   "Assure every package is installed, ask for installation if it’s not. Return a list of installed packages or nil for every skipped package."
+;;   (mapcar
+;;    (lambda (package)
+;;      ;; (package-installed-p 'evil)
+;;      (if (package-installed-p package)
+;;          nil
+;;        (if (y-or-n-p (format "Package %s is missing. Install it? " package))
+;;            (package-install package)
+;;          package)))
+;;    packages))
+
+;; ;; make sure to have downloaded archive description.
+;; ;; Or use package-archive-contents as suggested by Nicolas Dudebout
+;; (or (file-exists-p package-user-dir)
+;;     (package-refresh-contents))
+
+;; (ensure-package-installed 'redo+ 'ido 'flx-ido 'auto-complete-config 'multiple-cursors 'flycheck 'js-mode-hook 'auto-complete-config 'ace-jump-mode 'rainbow-delimiters 'auto-complete 'linum 'highline) ;  --> (nil nil) if iedit and magit are already installed
+
 ;; Initialise the package system.
 (package-initialize)
-
-;; Here is an example of how to install all the packages on first boot
-;; (defvar my-packages '(better-defaults
-;;                       clojure-mode
-;;                       clojure-test-mode
-;;                       cider))
-;; (dolist (p my-packages)
-;;   (when (not (package-installed-p p))
-;;     (package-install p)))
-
-;; Mac Key Mode
-;; (load "~/.emacs.d/mac-key-mode.el")
-;; (require 'mac-key-mode)
-;; (mac-key-mode 1)
 
 ;; # Mac like keyboard shortcuts
 
@@ -145,11 +152,6 @@
 ;; # The Bell
 ;; (setq ring-bell-function #'ignore)
 (setq ring-bell-function (lambda () (message "*beep*")))
- 
-;; # Multiple Cursors
-(require 'multiple-cursors)
-(global-unset-key (kbd "M-<down-mouse-1>"))
-(global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
 
 ;; # Sessions
 ;; Save the state of emacs on exit
