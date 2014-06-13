@@ -44,10 +44,10 @@
       (*type-face*          "#66D9EF")
       (*method-declaration* "#badeff")
       (*mode-inactive-bg*   "#222")
-      (*mode-line-bg*       "#000000") ;; 
+      (*mode-line-bg*       "#52532f") ;; "#000000"
       (*mode-line-fg*       "#00ffff") ;; "#EEDC82"
       (*mode-inactive-fg*   "#555")
-      (*mode-id-fg*         "#FFFFFF")
+      (*mode-id-fg*         "#FFFFFF") ;; "#FFFFFF"
       (*mode-id-bg*         "#FF0FFF")
       (*prompt*             "#FFFF00")
       (*normal*             "#DEDEDE")
@@ -61,7 +61,7 @@
 
       (*sub-function* "##9ab2c8")
       (*sub-function-light "#2a2b2f")
-      
+
       (*light-ui*           "#313131"))
 
   (custom-theme-set-faces

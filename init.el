@@ -33,7 +33,9 @@
                      
 (require 'redo+)     
                      
-;; ## Copy Paste Cut 
+;; ## Copy Paste Cut
+
+(delete-selection-mode 1)
                      
 (defun pbcopy ()     
   (interactive)      
@@ -354,15 +356,11 @@
 
 
 ;; # Backups
-;; Control where they are saved
-(setq backup-directory-alist `(("." . "~/.saves")))
-;; Control how they are saved. This should preform copies
-(setq backup-by-copying t) ;; this maybe slow
-;; As they are saved in there own directory save lots of version
-(setq delete-old-versions t
-  kept-new-versions 6
-  kept-old-versions 2
-  version-control t)
+;; Put the in the tmp dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 ;; # Auto complete
 (require 'auto-complete)
@@ -370,6 +368,21 @@
 
 ;; # File reloading
 (global-auto-revert-mode t)
+
+;; # Linum
+;; (setq linum-format 'dynamic)
+(require 'linum)
+(add-hook 'linum-before-numbering-hook '(lambda () (setq linum-format "%4d ")))
+;; (add-hook 'linum-before-numbering-hook '(lambda () ))
+
+;; # Line Highlight
+;; (global-hl-line-mode 1)
+(load "~/.emacs.d/highline.el")
+(require 'highline)
+(highline-mode 1)
+(global-highline-mode t)
+(set-face-background 'highline-face "#121214")
+
 
 ;; # Clojure Repl (Cider)
 ;; Stop it opening in a new window
@@ -396,6 +409,13 @@
                   (interactive)
                   (ignore-errors (backward-char 5))))
 
+;; ## Saner deleteing back
+(defun rc1-stepped-delete-back ()
+  (interactive)
+  (let ((here (point)))
+    (forward-whitespace -1)
+    (delete-region (point) here)))
+
 ;; ## Jade mode
 ;; I've edited this to allow for two column sizes
 (load "~/.emacs.d/jade-mode/jade-mode")
@@ -410,7 +430,14 @@
 (set-face-stipple 'highlight-indentation-face (list 2 2 (string 1 2)))
 
 ;; # Indentation
-(setq-default indent-tabs-mode nil)
+(add-hook 'prog-mode-hook
+    '(setq-default indent-tabs-mode nil))
+
+;; # New lines and indentatiom
+(defun end-of-line-and-indented-new-line ()
+  (interactive)
+  (end-of-line)
+  (newline-and-indent))
 
 ;; # Pasting
 (delete-selection-mode 1)
@@ -421,7 +448,7 @@
 (defun shrink-window-horizontally-fast ()
   (shrink-window-horizontally 3))
 (defun enlarge-window-horizontally-fast ()
-  (enlarge-window-horizontally 3))
+(enlarge-window-horizontally 3))
 
 ;; Window title
 (setq frame-title-format
@@ -465,6 +492,7 @@
 ;; Framesize
 (global-set-key (kbd "<C-up>") 'shrink-window)
 (global-set-key (kbd "<C-down>") 'enlarge-window)
+(global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
 (global-set-key (kbd "<S-C-right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "<S-C-left>") 'shrink-window-horizontally-fast) 
@@ -489,3 +517,11 @@
 (global-set-key (kbd "s--") 'text-scale-decrease)
 ;; Line numbers (linum)
 (global-set-key (kbd "s-l") 'linum-mode)
+;; New lines
+(global-set-key (kbd "S-RET") 'end-of-line-and-indented-new-line)
+(define-key global-map (kbd "RET") 'newline-and-indent)
+;; Selection
+(global-set-key (kbd "s-e") 'expand-region-to-whole-line)
+;; Deleteing
+(global-set-key "\M-\d" 'rc1-stepped-delete-back)
+
