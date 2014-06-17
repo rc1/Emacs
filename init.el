@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -87,9 +87,6 @@
       (goto-char (:my-bol-at beg))
       (set-mark (point))
       (goto-char (:my-eol-at end)))))
-
-;; No tabs
-(setq-default indent-tabs-mode nil)
 
 ;; # Ido Setup
 (require 'ido)
@@ -411,8 +408,9 @@
 (set-face-stipple 'highlight-indentation-face (list 2 2 (string 1 2)))
 
 ;; # Indentation
-(add-hook 'prog-mode-hook
-    '(setq-default indent-tabs-mode nil))
+(setq-default indent-tabs-mode nil)
+;; (add-hook 'prog-mode-hook
+;;     '(setq-default indent-tabs-mode nil))
 
 ;; # New lines and indentatiom
 (defun end-of-line-and-indented-new-line ()
@@ -440,6 +438,12 @@
 ;; Toolbar
 (if window-system
     (tool-bar-mode -1))
+
+;; Searching
+;; Keep the search highlighted
+(setq lazy-highlight-cleanup nil)
+;; to clean up
+;; M-x lazy-highlight-cleanup
 
 ;; Style
 (set-default 'cursor-type 'bar)
@@ -506,5 +510,5 @@
 ;; Deleteing
 (global-set-key "\M-\d" 'rc1-stepped-delete-back)
 ;; Better ido file
-(global-set-key (kbd "M-SPC") 'ido-recentf-open)
+;; (global-set-key (kbd "M-SPC") 'ido-recentf-open)
 
