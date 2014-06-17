@@ -32,7 +32,7 @@
 
 (let ((*background*         "#2a2b2f")
       (*comments*           "#8C8C8C")
-      (*constant*           "#FF80F4")
+      (*constant*           "#9cd6d4")
       (*current-line*       "#151515")
       (*cursor-underscore*  "#EEDC82")
       (*keywords*           "#cfff7d")
@@ -44,8 +44,9 @@
       (*type-face*          "#66D9EF")
       (*method-declaration* "#badeff")
       (*mode-inactive-bg*   "#222")
-      (*mode-line-bg*       "#52532f") ;; "#000000"
-      (*mode-line-fg*       "#00ffff") ;; "#EEDC82"
+      (*mode-line-line*     "#EDECEC")
+      (*mode-line-bg*       "#222") ;; "#EDECEC" "#F2F2F2" "#52532f" "#000000"
+      (*mode-line-fg*       "#00ffff") ;; "#00ffff" "#EEDC82"
       (*mode-inactive-fg*   "#555")
       (*mode-id-fg*         "#FFFFFF") ;; "#FFFFFF"
       (*mode-id-bg*         "#FF0FFF")
@@ -56,7 +57,7 @@
       (*warning*            "#FF6C60")
       (*regexp*             "#ff679f")
       (*string*             "#fffd31")
-      (*variable*           "#f600ff")
+      (*variable*           "#FF80F4")
       (*visual-selection*   "#555")
 
       (*sub-function* "##9ab2c8")
@@ -102,7 +103,7 @@
    `(fringe ((t (:background, *light-ui*))))
    `(linum ((t (:background, *line-number* :foreground, *line-fg*))))
    `(minibuffer-prompt ((t (:foreground, *prompt*))))
-   `(mode-line ((t (:background, *mode-line-bg* :foreground, *mode-line-fg*))))
+   `(mode-line ((t (:background, *mode-line-bg* :foreground, *mode-line-fg* :overline t))))
    `(mode-line-inactive ((t (:background, *mode-inactive-bg* :foreground, *mode-inactive-fg*))))
    `(mode-line-buffer-id ((t (:background, *mode-id-bg* :foreground, *mode-id-fg*))))
    `(cursor ((t (:background, *cursor-underscore*))))
