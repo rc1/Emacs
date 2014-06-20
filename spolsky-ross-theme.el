@@ -59,11 +59,13 @@
       (*string*             "#fffd31")
       (*variable*           "#FF80F4")
       (*visual-selection*   "#555")
-
-      (*sub-function* "##9ab2c8")
+      
+      (*sub-function*       "##9ab2c8")
       (*sub-function-light "#2a2b2f")
 
-      (*light-ui*           "#313131"))
+      (*light-ui*           "#313131")
+      (*rc1-fn-arg*         "#dfffba")
+      (*rc1-fn-ar1g*         "#c7baff"))
 
   (custom-theme-set-faces
    'spolsky-ross
@@ -119,7 +121,13 @@
    `(isearch-fail ((t (:background, *warning*))))
    `(lazy-highlight ((t (:background, *operators* :foreground, *visual-selection*))))
 
+   ;; js2-mode
+   `(js2-function-param ((t (:foreground, *rc1-fn-ar1g*))))
+   `(js2-function-call ((t (:foreground, *rc1-fn-arg*))))
+     
    ))
+
+
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)
