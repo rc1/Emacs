@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -199,17 +199,11 @@
 (global-unset-key (kbd "M-<down-mouse-1>"))
 (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
 
-;; # SrSpeedvar   
-;; Allows speedbar to open up in the current window instead of a new frame
-;; (require 'sr-speedbar)
-;; Add a key binding for speedbar
-;; (global-set-key (kbd "C-c s") 'sr-speedbar-select-window)
+;; # Projectile
+(require 'projectile)
+(projectile-global-mode)
+;; (add-hook 'ruby-mode-hook 'projectile-on)
 
-;; # Sessions
-;; Save the state of emacs on exit
-;; It needs to be save in the Aquamacs
-;; preferences location?
-(desktop-save-mode 1)
 
 ;; # JS2 Mode
 ;; To use it as a major mode
@@ -511,4 +505,6 @@
 (global-set-key "\M-\d" 'rc1-stepped-delete-back)
 ;; Better ido file
 ;; (global-set-key (kbd "M-SPC") 'ido-recentf-open)
+;; Imenu-anywhere
+(global-set-key (kbd "C-.") 'imenu-anywhere)
 
