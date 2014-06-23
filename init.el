@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -310,9 +310,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(completions-common-part ((t (:inherit default :foreground "red"))))
- '(diredp-compressed-file-suffix ((t (:foreground "#7b68ee"))))
- '(diredp-ignored-file-name ((t (:foreground "#aaaaaa"))))
-
+ '(diredp-compressed-file-suffix ((t (:foreground "#7b68ee"))) t)
+ '(diredp-ignored-file-name ((t (:foreground "#aaaaaa"))) t)
  '(rainbow-delimiters-depth-1-face ((t (:foreground "#00ff00"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "#00fff6"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "#aaff00"))))
@@ -323,8 +322,7 @@
  '(rainbow-delimiters-depth-8-face ((t (:foreground "#f6ff00"))))
  '(rainbow-delimiters-depth-9-face ((t (:foreground "#8b7500"))))
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red"))))
-
- '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
+ '(show-paren-match ((((class color) (background light)) (:background "azure2"))) t))
 
 
 ;; # Backups
@@ -440,6 +438,7 @@
 ;; M-x lazy-highlight-cleanup
 
 ;; Style
+(require 'rainbow-mode)
 (set-default 'cursor-type 'bar)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook 'rainbow-mode)
@@ -508,3 +507,9 @@
 ;; Imenu-anywhere
 (global-set-key (kbd "C-.") 'imenu-anywhere)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("b07089ce370c09e056fb867cfdd1f49164d3ca04668fba7e4ed011536c0890ec" default))))
