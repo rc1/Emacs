@@ -12,3 +12,5 @@ elpa
 /tramp
 
 /eshell/
+projectile-bookmarks.eld
+session*
