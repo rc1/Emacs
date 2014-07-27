@@ -27,7 +27,7 @@
 ;; Allow hash to be entered  
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
                      
-(require 'redo+)     
+(require 'redo+)
                      
 ;; ## Copy Paste Cut
 
@@ -105,6 +105,9 @@
 ;; Use up down keys to move through options
 ;; and left right to move through directories, yay!
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
+;; # Speedbar
+(custom-set-variables '(speedbar-show-unknown-files t))
 
 ;; # Recent files
 ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
@@ -417,9 +420,11 @@
 ;; Up and down may conflict
 
 (defun shrink-window-horizontally-fast ()
+  (interactive)
   (shrink-window-horizontally 3))
 (defun enlarge-window-horizontally-fast ()
-(enlarge-window-horizontally 3))
+  (interactive)
+  (enlarge-window-horizontally 3))
 
 ;; Window title
 (setq frame-title-format
