@@ -82,7 +82,7 @@ For detail, see `comment-dwim'."
   "Major mode for editing jade node.js templates"
   :syntax-table jade-syntax-table
 
-  (setq tab-width 2)
+  (setq tab-width 4)
 
   (setq mode-name "Jade")
   (setq major-mode 'jade-mode)
@@ -91,7 +91,7 @@ For detail, see `comment-dwim'."
   (set (make-local-variable 'comment-start) "// ")
 
   ;; default tab width
-  (setq sws-tab-width 2)
+  (setq sws-tab-width 4)
   (make-local-variable 'indent-line-function)
   (setq indent-line-function 'sws-indent-line)
   (make-local-variable 'indent-region-function)
