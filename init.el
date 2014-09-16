@@ -396,6 +396,7 @@
 (add-hook 'python-mode-hook 'highlight-ntation-mode) 
 (add-hook 'js2-mode-hook 'highlight-indentation-mode)
 (add-hook 'less-css-hook 'highlight-indentation-mode)
+(add-hook 'jade-hook 'highlight-indentation-mode)
 (set-face-background 'highlight-indentation-face "#000000")
 (set-face-background 'highlight-indentation-current-column-face "#000000")
 (set-face-stipple 'highlight-indentation-face (list 2 2 (string 1 2)))
