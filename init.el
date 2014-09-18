@@ -327,12 +327,6 @@
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red"))))
  '(show-paren-match ((((class color) (background light)) (:background "azure2"))) t))
 
-
-;; # Backups
-;; Put the in the tmp dir
-(setq backup-directory-alist `((".*" . "~/.emacs.saves")))
-(setq auto-save-file-name-transforms `((".*" "~/.emacs.saves" t)))
-
 ;; # Auto complete
 (require 'auto-complete)
 (global-auto-complete-mode t)
@@ -354,6 +348,9 @@
 (global-highline-mode t)
 (set-face-background 'highline-face "#121214")
 
+;; disable auto-save and auto-backup
+(setq auto-save-default nil)
+(setq make-backup-files nil)
 
 ;; # Clojure Repl (Cider)
 ;; Stop it opening in a new window
