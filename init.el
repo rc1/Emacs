@@ -131,7 +131,8 @@
 
 ;; # The Bell
 ;; (setq ring-bell-function #'ignore)
-(setq ring-bell-function (lambda () (message "*beep*")))
+(setq visible-bell 'top-bottom)
+;; (setq ring-bell-function (lambda () (message "*beep*")))
 
 ;; # Sessions
 ;; Save the state of emacs on exit
