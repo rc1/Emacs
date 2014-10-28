@@ -24,6 +24,9 @@
 (setq ns-function-modifier 'control) 
 ;; There is also 'hyper ;; H
 
+;; Scrolling
+(setq jit-lock-defer-time 0.5)
+
 ;; Allow hash to be entered  
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
                      
@@ -131,7 +134,7 @@
 
 ;; # The Bell
 ;; (setq ring-bell-function #'ignore)
-(setq visible-bell 'top-bottom)
+(setq visible-bell 'bottom) ;; 'top-bottom
 ;; (setq ring-bell-function (lambda () (message "*beep*")))
 
 ;; # Sessions
@@ -219,6 +222,20 @@
 
 ;; # C++
 (setq-default c-basic-offset 4)
+
+;; # Mode line in header
+;; Command to toggle the display of the mode-line as a header
+(defvar-local header-line-format nil)
+(defun mode-line-in-header ()
+  (interactive)
+  (if (not header-line-format)
+      (setq header-line-format mode-line-format
+            mode-line-format nil)
+    (setq mode-line-format header-line-format
+          header-line-format nil))
+  (set-window-buffer nil (current-buffer)))
+(add-hook 'text-mode-hook 'mode-line-in-header)
+(add-hook 'prog-mode-hook 'mode-line-in-header)
 
 ;; ;; # Line Moveing
 
@@ -508,6 +525,16 @@
 ;; (global-set-key (kbd "M-SPC") 'ido-recentf-open)
 ;; Imenu-anywhere
 (global-set-key (kbd "C-.") 'imenu-anywhere)
+;; Projectile
+(global-set-key (kbd "C-c f") 'projectile-find-file)
+(global-set-key (kbd "C-c b") 'projectile-switch-to-buffer)
+;; Auto Complete
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+;; Unbind the minimise (suspend-frame key)
+(global-unset-key "\C-z")
+;; Make save all just save current file
+(global-set-key (kbd "C-x s") 'save-buffer)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
