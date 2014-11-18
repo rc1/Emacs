@@ -535,6 +535,9 @@
 (global-unset-key "\C-z")
 ;; Make save all just save current file
 (global-set-key (kbd "C-x s") 'save-buffer)
+;; Move to previous mark
+(global-set-key (kbd "s-.") 'pop-to-mark-command)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
