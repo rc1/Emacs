@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -365,6 +365,12 @@
 (highline-mode 1)
 (global-highline-mode t)
 (set-face-background 'highline-face "#121214")
+
+;; # Nyan Mode
+;; This is also how to enable a mode
+;; for all programming langauges they inherit
+;; for prog-mode
+(add-hook 'prog-mode-hook 'nyan-mode)
 
 ;; disable auto-save and auto-backup
 (setq auto-save-default nil)
