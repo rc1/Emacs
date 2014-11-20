@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -358,6 +358,10 @@
 (add-hook 'linum-before-numbering-hook '(lambda () (setq linum-format "%4d ")))
 ;; (add-hook 'linum-before-numbering-hook '(lambda () ))
 
+;; Org Mouse
+(load "~/.emacs.d/org-mouse.el")
+(require 'org-mouse)
+
 ;; # Line Highlight
 ;; (global-hl-line-mode 1)
 (load "~/.emacs.d/highline.el")
@@ -470,6 +474,24 @@
 ;; (set-face-background 'fringe "#313131")
 (load "~/.emacs.d/spolsky-ross-theme.el")
 (load-theme `spolsky-ross)
+
+;; Mark moving
+;; Ref: http://stackoverflow.com/a/3399064/179015
+(defun unpop-to-mark-command ()
+  "Unpop off mark ring into the buffer's actual mark.
+Does not set point.  Does nothing if mark ring is empty."
+  (interactive)
+  (let ((num-times (if (equal last-command 'pop-to-mark-command) 2
+                     (if (equal last-command 'unpop-to-mark-command) 1
+                       (error "Previous command was not a (un)pop-to-mark-command")))))
+    (dotimes (x num-times)
+      (when mark-ring
+        (setq mark-ring (cons (copy-marker (mark-marker)) mark-ring))
+        (set-marker (mark-marker) (+ 0 (car (last mark-ring))) (current-buffer))
+        (when (null (mark t)) (ding))
+        (setq mark-ring (nbutlast mark-ring))
+        (goto-char (mark t)))
+      (deactivate-mark))))
              
 ;; Shortcuts
 ;; To find the shortcut do: C-h k then the keypress
@@ -543,6 +565,7 @@
 (global-set-key (kbd "C-x s") 'save-buffer)
 ;; Move to previous mark
 (global-set-key (kbd "s-.") 'pop-to-mark-command)
+(global-set-key (kbd "s->") 'unpop-to-mark-command)
 
 
 (custom-set-variables
