@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -237,7 +237,7 @@
 (add-hook 'text-mode-hook 'mode-line-in-header)
 (add-hook 'prog-mode-hook 'mode-line-in-header)
 
-;; ;; # Line Moveing
+;; # Line Moveing
 
 (defun move-text-internal (arg)
   (cond
@@ -492,6 +492,27 @@ Does not set point.  Does nothing if mark ring is empty."
         (setq mark-ring (nbutlast mark-ring))
         (goto-char (mark t)))
       (deactivate-mark))))
+
+;; JS2 Mode & Fly Check
+(add-hook 'js2-mode-hook 'flycheck-mode)
+(require 'js2-mode)
+;; Disable js2 mode's syntax error highlighting by default...
+(setq-default js2-mode-show-parse-errors nil
+            js2-mode-show-strict-warnings nil)
+;; ... but enable it if flycheck can't handle javascript
+(autoload 'flycheck-get-checker-for-buffer "flycheck")
+(defun sanityinc/disable-js2-checks-if-flycheck-active ()
+(unless (flycheck-get-checker-for-buffer)
+  (set (make-local-variable 'js2-mode-show-parse-errors) t)
+  (set (make-local-variable 'js2-mode-show-strict-warnings) t)))
+(add-hook 'js2-mode-hook 'sanityinc/disable-js2-checks-if-flycheck-active)
+
+;; JS2 Mode Shorthand
+;; https://github.com/howardabrams/dot-files/blob/master/emacs-javascript.org
+(font-lock-add-keywords
+ 'js2-mode `(("\\(function *\\)(" ;; \\(function *\\
+              (0 (progn (compose-region (match-beginning 1) (match-end 1) "ƒ")
+                        nil)))))
              
 ;; Shortcuts
 ;; To find the shortcut do: C-h k then the keypress
@@ -566,7 +587,8 @@ Does not set point.  Does nothing if mark ring is empty."
 ;; Move to previous mark
 (global-set-key (kbd "s-.") 'pop-to-mark-command)
 (global-set-key (kbd "s->") 'unpop-to-mark-command)
-
+;; js-2 refactor short menu
+(js2r-add-keybindings-with-prefix "C-c C-m")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
