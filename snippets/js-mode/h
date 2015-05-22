@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+#name : jshint options
+# --
+/* jshint unused: false, -W117 */
+"use strict";

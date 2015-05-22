@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -7,6 +7,7 @@
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ;; Initialise the package system.
 (package-initialize)
+
 ;; ## Auto Install Packages
 ; fetch the list of packages available 
 (unless package-archive-contents
@@ -90,6 +91,17 @@
       (goto-char (:my-bol-at beg))
       (set-mark (point))
       (goto-char (:my-eol-at end)))))
+
+;; # Yasnippet
+;; Not adding this via elpa so there
+;; are no snippets by default
+(require 'yasnippet)
+(yas-global-mode 1)
+(setq yas-installed-snippets-dir nil) ;; This should disable preinstalled snippets
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"
+        ;; "some other place"
+       )) 
 
 ;; # Ido Setup
 (require 'ido)
@@ -273,7 +285,6 @@
   arg lines up."
   (interactive "*p")
   (move-text-internal (- arg)))
-
 
 ;; # Frame loading and saving
 (defun save-framegeometry ()
@@ -511,9 +522,37 @@ Does not set point.  Does nothing if mark ring is empty."
 ;; https://github.com/howardabrams/dot-files/blob/master/emacs-javascript.org
 (font-lock-add-keywords
  'js2-mode `(("\\(function *\\)(" ;; \\(function *\\
-              (0 (progn (compose-region (match-beginning 1) (match-end 1) "ƒ")
+              (0 (progn (compose-region (match-beginning 1) (match-end 1) "#" ) ;;ƒ
                         nil)))))
-             
+
+;; Dired File Opening on OSX
+(defun ergoemacs-open-in-external-app ()
+  "Open the current file or dired marked files in external app."
+  (interactive)
+  (let ( doIt
+         (myFileList
+          (cond
+           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
+           (t (list (buffer-file-name))) ) ) )
+
+    (setq doIt (if (<= (length myFileList) 5)
+                   t
+                 (y-or-n-p "Open more than 5 files?") ) )
+
+    (when doIt
+      (cond
+       ((string-equal system-type "windows-nt")
+        (mapc (lambda (fPath) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" fPath t t)) ) myFileList)
+        )
+       ((string-equal system-type "darwin")
+        (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)) )  myFileList) )
+       ((string-equal system-type "gnu/linux")
+        (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath)) ) myFileList) ) ) ) ) )
+
+;; Undo tree
+(require 'undo-tree)
+(global-undo-tree-mode)
+
 ;; Shortcuts
 ;; To find the shortcut do: C-h k then the keypress
 
@@ -551,6 +590,7 @@ Does not set point.  Does nothing if mark ring is empty."
 (global-set-key [C-s-down] 'move-text-down)
 ;; Ace jump mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "C-x SPC") 'ace-jump-char-mode)
 ;; Open Recent
 (global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 ;; Commenting 
@@ -589,6 +629,11 @@ Does not set point.  Does nothing if mark ring is empty."
 (global-set-key (kbd "s->") 'unpop-to-mark-command)
 ;; js-2 refactor short menu
 (js2r-add-keybindings-with-prefix "C-c C-m")
+;; Dired file opening
+(defun rc1/dired-keys ()
+  "Modify keymaps used by `dired-mode'."
+  (local-set-key (kbd "C-o") 'ergoemacs-open-in-external-app))
+(add-hook 'dired-mode 'rc1/dired-keys) 
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

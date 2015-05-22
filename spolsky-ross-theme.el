@@ -61,7 +61,14 @@
       (*visual-selection*   "#555")
       
       (*sub-function*       "##9ab2c8")
-      (*sub-function-light "#2a2b2f")
+      (*sub-function-light  "#2a2b2f")
+
+      (*level-1*            "#fa67ff")
+      (*level-2*            "#ff7c67")
+      (*level-3*            "#fffa67")
+      (*level-4*            "#92ff67")
+      (*level-5*            "#67fffa")
+      (*level-6*            "#6772ff")
 
       (*light-ui*           "#313131")
       (*rc1-fn-arg*         "#dfffba")
@@ -124,6 +131,14 @@
    ;; js2-mode
    `(js2-function-param ((t (:foreground, *rc1-fn-ar1g*))))
    `(js2-function-call ((t (:foreground, *rc1-fn-arg*))))
+
+   ;; Org-mode
+   `(org-level-1 ((t (:foreground, *level-1*))))
+   `(org-level-2 ((t (:foreground, *level-2*))))
+   `(org-level-3 ((t (:foreground, *level-3*))))
+   `(org-level-4 ((t (:foreground, *level-4*))))
+   `(org-level-5 ((t (:foreground, *level-5*))))
+   `(org-level-6 ((t (:foreground, *level-6*))))
      
    ))
 

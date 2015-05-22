@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : promise
+# --
+return W.promise( function ( resolve, reject ) {
+    $0
+});

@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+#name : quote
+# --
+'$0'
