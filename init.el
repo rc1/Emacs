@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree nodejs-repl))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -223,7 +223,6 @@
 (projectile-global-mode)
 ;; (add-hook 'ruby-mode-hook 'projectile-on)
 
-
 ;; # JS2 Mode
 ;; To use it as a major mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -248,6 +247,20 @@
   (set-window-buffer nil (current-buffer)))
 (add-hook 'text-mode-hook 'mode-line-in-header)
 (add-hook 'prog-mode-hook 'mode-line-in-header)
+
+;; # Artistic Style
+;;
+;; Adds spaces between:
+;; + function arguments
+;; + operators
+;;
+;; astyle needs to be installed `brew install astyle`
+(defun astyle-this-buffer (pmin pmax)
+  (interactive "r")
+  (shell-command-on-region pmin pmax
+                           "astyle --pad-oper --pad-paren-in" ;; add options here...
+                           (current-buffer) t 
+                           (get-buffer-create "*Astyle Errors*") t))
 
 ;; # Line Moveing
 
@@ -585,6 +598,7 @@ Does not set point.  Does nothing if mark ring is empty."
 ;; Indentation
 (global-set-key (kbd "s-[") (lambda () (interactive) (expand-region-to-whole-line) (shift-left 4)))
 (global-set-key (kbd "s-]") (lambda () (interactive) (expand-region-to-whole-line) (shift-right 4)))
+(global-set-key (kbd "M-s-i") 'astyle-this-buffer)
 ;; Moving text
 (global-set-key [C-s-up] 'move-text-up)
 (global-set-key [C-s-down] 'move-text-down)
