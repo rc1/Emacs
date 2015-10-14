@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree nodejs-repl))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree nodejs-repl jade-mode))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -435,10 +435,6 @@
   (let ((here (point)))
     (forward-whitespace -1)
     (delete-region (point) here)))
-
-;; ## Jade mode
-;; I've edited this to allow for two column sizes
-(load "~/.emacs.d/jade-mode/jade-mode")
 
 ;; ## Indetation highlighing
 (load "~/.emacs.d/highlight-indentation")
