@@ -226,6 +226,7 @@
 ;; # JS2 Mode
 ;; To use it as a major mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json5\\'" . js2-mode))
 ;; Hook into node.js in shell
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 ;; To customise it
@@ -611,6 +612,8 @@ Does not set point.  Does nothing if mark ring is empty."
 ;; Text size
 (global-set-key (kbd "s-=") 'text-scale-increase)
 (global-set-key (kbd "s--") 'text-scale-decrease)
+;; Align
+(global-set-key (kbd "C-c a") 'align-regexp)
 ;; Line numbers (linum)
 (global-set-key (kbd "s-l") 'linum-mode)
 ;; New lines
