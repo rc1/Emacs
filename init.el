@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree nodejs-repl jade-mode))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree nodejs-repl jade-mode projectile-speedbar))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -123,6 +123,7 @@
 
 ;; # Speedbar
 (custom-set-variables '(speedbar-show-unknown-files t))
+(require 'projectile-speedbar)
 
 ;; # Recent files
 ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
@@ -646,7 +647,9 @@ Does not set point.  Does nothing if mark ring is empty."
 (defun rc1/dired-keys ()
   "Modify keymaps used by `dired-mode'."
   (local-set-key (kbd "C-o") 'ergoemacs-open-in-external-app))
-(add-hook 'dired-mode 'rc1/dired-keys) 
+(add-hook 'dired-mode 'rc1/dired-keys)
+;; Speedbar
+(global-set-key (kbd "<f2>") 'projectile-speedbar-open-current-buffer-in-tree)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
