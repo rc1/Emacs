@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree nodejs-repl jade-mode projectile-speedbar))
+(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree nodejs-repl pug-mode projectile-speedbar highlight-indent-guides))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -439,14 +439,21 @@
     (delete-region (point) here)))
 
 ;; ## Indetation highlighing
-(load "~/.emacs.d/highlight-indentation")
-(add-hook 'python-mode-hook 'highlight-ntation-mode) 
-(add-hook 'js2-mode-hook 'highlight-indentation-mode)
-(add-hook 'less-css-hook 'highlight-indentation-mode)
-(add-hook 'jade-hook 'highlight-indentation-mode)
-(set-face-background 'highlight-indentation-face "#000000")
-(set-face-background 'highlight-indentation-current-column-face "#000000")
-(set-face-stipple 'highlight-indentation-face (list 2 2 (string 1 2)))
+;; (load "~/.emacs.d/highlight-indentation")
+;; (add-hook 'python-mode-hook 'highlight-ntation-mode) 
+;; (add-hook 'js2-mode-hook 'highlight-indentation-mode)
+;; (add-hook 'less-css-hook 'highlight-indentation-mode)
+;; (add-hook 'jade-hook 'highlight-indentation-mode)
+;; (set-face-background 'highlight-indentation-face "#000000")
+;; (set-face-background 'highlight-indentation-current-column-face "#000000")
+;; (set-face-stipple 'highlight-indentation-face (list 2 2 (string 1 2)))
+(require 'highlight-indent-guides)
+(setq highlight-indent-guides-method 'character) ;; 'column 'fill
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(add-to-list 'auto-mode-alist '("\\.jade$\\'" . highlight-indent-guides-mode))
+(set-face-background 'highlight-indent-guides-odd-face "#373C63")
+(set-face-background 'highlight-indent-guides-even-face "#304852")
+(set-face-foreground 'highlight-indent-guides-character-face "#373C63")
 
 ;; # Indentation
 (setq-default indent-tabs-mode nil)
@@ -649,7 +656,7 @@ Does not set point.  Does nothing if mark ring is empty."
   (local-set-key (kbd "C-o") 'ergoemacs-open-in-external-app))
 (add-hook 'dired-mode 'rc1/dired-keys)
 ;; Speedbar
-(global-set-key (kbd "<f2>") 'projectile-speedbar-open-current-buffer-in-tree)
+(global-set-key (kbd "<f12>") 'projectile-speedbar-open-current-buffer-in-tree)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
