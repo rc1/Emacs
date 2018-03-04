@@ -21,7 +21,7 @@
 ;; Standard faces: http://www.gnu.org/software/emacs/manual/html_node/emacs/Standard-Faces.html
 
 
-(unless (>= 24 emacs-major-version)
+(unless (>= 25 emacs-major-version)
   (error "requires Emacs 24 or later."))
 
 (deftheme spolsky-ross  "An edited dark color theme for Emacs based on Sublime Text 2")
@@ -59,7 +59,7 @@
       (*string*             "#fffd31")
       (*variable*           "#FF80F4")
       (*visual-selection*   "#555")
-      
+
       (*sub-function*       "##9ab2c8")
       (*sub-function-light  "#2a2b2f")
 
@@ -139,7 +139,7 @@
    `(org-level-4 ((t (:foreground, *level-4*))))
    `(org-level-5 ((t (:foreground, *level-5*))))
    `(org-level-6 ((t (:foreground, *level-6*))))
-     
+
    ))
 
 
@@ -154,5 +154,3 @@
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; End:
-
-

@@ -1,5 +1,5 @@
 ;; # Packages
-(setq package-list '(redo+ ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree nodejs-repl projectile-speedbar highlight-indent-guides jade-mode))
+(setq package-list '(ido flx-ido multiple-cursors flycheck ace-jump-mode rainbow-delimiters auto-complete ido-vertical-mode less-css-mode yaml-mode projectile imenu-anywhere sws-mode rainbow-mode js2-mode skewer-mode nyan-mode flycheck js2-refactor yasnippet markdown-mode undo-tree nodejs-repl projectile-speedbar highlight-indent-guides jade-mode))
 ;; ## Requires Emacs' Package functionality
 (require 'package)
 ;; Add the Melpa repository to the list of package sources
@@ -9,7 +9,7 @@
 (package-initialize)
 
 ;; ## Auto Install Packages
-; fetch the list of packages available 
+; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
 ;; nstall the missing packages
@@ -22,23 +22,21 @@
 ;; ## Super Meta etc
 (setq mac-option-modifier 'meta) ;; M
 (setq mac-command-modifier 'super) ;; s
-(setq ns-function-modifier 'control) 
+(setq ns-function-modifier 'control)
 ;; There is also 'hyper ;; H
 
 ;; Scrolling
 (setq jit-lock-defer-time 0.5)
 
-;; Allow hash to be entered  
+;; Allow hash to be entered
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
-                     
-(require 'redo+)
-                     
+
 ;; ## Copy Paste Cut
 
 (delete-selection-mode 1)
-                     
-(defun pbcopy ()     
-  (interactive)      
+
+(defun pbcopy ()
+  (interactive)
   (call-process-region (point) (mark) "pbcopy")
   (setq deactivate-mark t))
 
@@ -75,12 +73,12 @@
 
 
 ;; http://stackoverflow.com/questions/13186811/emacs-extending-expanding-region-so-that-it-embraces-whole-lines
-(defun :my-bol-at (point) (interactive) 
+(defun :my-bol-at (point) (interactive)
   (save-excursion
     (goto-char point)
     (point-at-bol)))
 
-(defun :my-eol-at (point) (interactive) 
+(defun :my-eol-at (point) (interactive)
   (save-excursion
     (goto-char point)
     (point-at-eol)))
@@ -101,13 +99,13 @@
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets"
         ;; "some other place"
-       )) 
+       ))
 
 ;; # Ido Setup
 (require 'ido)
 (require 'flx-ido)
 (ido-mode t)
-(setq ido-enable-flex-matching t) 
+(setq ido-enable-flex-matching t)
 (setq id-everywhere t)
 (flx-ido-mode 1)
 ;; disable ido faces to see flx highlights.
@@ -127,7 +125,7 @@
 
 ;; # Recent files
 ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
-(require 'recentf) 
+(require 'recentf)
 ;; get rid of `find-file-read-only' and replace it with something
 ;; more useful.
 ;; enable recent files mode.
@@ -173,7 +171,7 @@
 
 ;; # Recent files
 ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
-(require 'recentf) 
+(require 'recentf)
 ;; get rid of `find-file-read-only' and replace it with something
 ;; more useful.
 ;; enable recent files mode.
@@ -213,7 +211,7 @@
             end (line-end-position)))
     (comment-or-uncomment-region beg end)
     (next-line)))
- 
+
 ;; # Multiple Cursors
 (require 'multiple-cursors)
 (global-unset-key (kbd "M-<down-mouse-1>"))
@@ -261,7 +259,7 @@
   (interactive "r")
   (shell-command-on-region pmin pmax
                            "astyle --pad-oper --pad-paren-in" ;; add options here...
-                           (current-buffer) t 
+                           (current-buffer) t
                            (get-buffer-create "*Astyle Errors*") t))
 
 ;; # Line Moveing
@@ -311,7 +309,7 @@
         (framegeometry-height (frame-parameter (selected-frame) 'height))
         (framegeometry-file (expand-file-name "~/.emacs.d/framegeometry"))
         )
- 
+
     (with-temp-buffer
       (insert
        ";;; This is the previous emacs frame's geometry.\n"
@@ -324,13 +322,13 @@
        (format "        (height . %d)))\n" (max framegeometry-height 0)))
       (when (file-writable-p framegeometry-file)
         (write-file framegeometry-file)))))
- 
+
 (defun load-framegeometry ()
   "Loads ~/.emacs.d/framegeometry which should load the previous frame's geometry."
   (let ((framegeometry-file (expand-file-name "~/.emacs.d/framegeometry")))
     (when (file-readable-p framegeometry-file)
       (load-file framegeometry-file))))
- 
+
 ;; Special work to do ONLY when there is a window system being used
 (if window-system
     (progn
@@ -440,7 +438,7 @@
 
 ;; ## Indetation highlighing
 ;; (load "~/.emacs.d/highlight-indentation")
-;; (add-hook 'python-mode-hook 'highlight-ntation-mode) 
+;; (add-hook 'python-mode-hook 'highlight-ntation-mode)
 ;; (add-hook 'js2-mode-hook 'highlight-indentation-mode)
 ;; (add-hook 'less-css-hook 'highlight-indentation-mode)
 ;; (add-hook 'jade-hook 'highlight-indentation-mode)
@@ -598,7 +596,7 @@ Does not set point.  Does nothing if mark ring is empty."
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
 (global-set-key (kbd "<S-C-right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "<S-C-left>") 'shrink-window-horizontally-fast) 
+(global-set-key (kbd "<S-C-left>") 'shrink-window-horizontally-fast)
 (global-set-key (kbd "<S-C-right>") 'enlarge-window-horizontally-fast)
 ;; Indentation
 (global-set-key (kbd "s-[") (lambda () (interactive) (expand-region-to-whole-line) (shift-left 4)))
@@ -612,9 +610,9 @@ Does not set point.  Does nothing if mark ring is empty."
 (define-key global-map (kbd "C-x SPC") 'ace-jump-char-mode)
 ;; Open Recent
 (global-set-key (kbd "C-x C-r") 'ido-recentf-open)
-;; Commenting 
+;; Commenting
 ;;(global-unset-key (kbd "C-/")) <-- for aquamacs
-(global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line) 
+(global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
 ;; Open Recent
 (global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 ;; Text size
