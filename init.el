@@ -8,6 +8,13 @@
 ;; Initialise the package system.
 (package-initialize)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("b07089ce370c09e056fb867cfdd1f49164d3ca04668fba7e4ed011536c0890ec" default))))
+
 ;; ## Auto Install Packages
 ; fetch the list of packages available
 (unless package-archive-contents
@@ -500,7 +507,7 @@
 (add-hook 'prog-mode-hook 'rainbow-mode)
 ;; (set-face-background 'fringe "#313131")
 (load "~/.emacs.d/spolsky-ross-theme.el")
-(load-theme `spolsky-ross)
+(load-theme `spolsky-ross t)
 
 ;; Mark moving
 ;; Ref: http://stackoverflow.com/a/3399064/179015
@@ -656,9 +663,3 @@ Does not set point.  Does nothing if mark ring is empty."
 ;; Speedbar
 (global-set-key (kbd "<f12>") 'projectile-speedbar-open-current-buffer-in-tree)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("b07089ce370c09e056fb867cfdd1f49164d3ca04668fba7e4ed011536c0890ec" default))))
